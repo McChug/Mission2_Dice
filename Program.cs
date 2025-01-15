@@ -9,7 +9,7 @@ internal class Program
         // Run opening statements and collect user input
         System.Console.WriteLine("Welcome to the dice throwing simulator!");
         System.Console.WriteLine("How many dice rolls would you like to simulate?");
-        int number_of_rolls = System.Console.ReadLine() ? int.Parse(System.Console.ReadLine()) : 10;
+        int number_of_rolls = int.TryParse(System.Console.ReadLine(), out int result) ? result : 0;
 
         // Run the Roll() method using the user's number of rolls
         int[] roll_results = rd.Roll(number_of_rolls);
@@ -29,7 +29,12 @@ internal class Program
                 hist_bar += "*";
             }
             // Print the number and bar
-            Console.WriteLine((i + 2) + ": " + hist_bar);
+            string colon = ":  ";
+            if (i + 2 >= 10)
+            {
+                colon = ": ";
+            }
+            Console.WriteLine((i + 2) + colon + hist_bar);
         }
 
         System.Console.WriteLine("Thank you for using the dice throwing simulator. Goodbye!");
